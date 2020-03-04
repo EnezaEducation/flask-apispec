@@ -36,7 +36,7 @@ def read(fname):
 
 
 setup(
-    name='flask-apispec',
+    name='eneza-flask-apispec',
     version=find_version('flask_apispec/__init__.py'),
     description='Build and document REST APIs with Flask and apispec',
     long_description=read('README.rst'),

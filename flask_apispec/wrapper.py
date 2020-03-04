@@ -65,14 +65,16 @@ class Wrapper(object):
             output = dumped.data if MARSHMALLOW_VERSION_INFO[0] < 3 else dumped
         else:
             output = unpacked[0]
-        return format_output((format_response(output), ) + unpacked[1:])
+        response_object = format_response(output)
+        response_object.status_code = unpacked[1] or 200
+        return format_output((response_object,))
 
 def identity(value):
     return value
 
 def unpack(resp):
-    resp = resp if isinstance(resp, tuple) else (resp, )
-    return resp + (None, ) * (3 - len(resp))
+    resp = resp if isinstance(resp, tuple) else (resp,)
+    return resp + (None,) * (3 - len(resp))
 
 def format_output(values):
     while values[-1] is None:
